@@ -31,6 +31,7 @@ final class CarouselViewController: UIPageViewController {
         pageControl.pageIndicatorTintColor = .gray
         pageControl.currentPageIndicatorTintColor = .blue
         view.addSubview(pageControl)
+        view.isUserInteractionEnabled = false
 
         let bottomConstant: CGFloat = view.bounds.height * 0.30
 
