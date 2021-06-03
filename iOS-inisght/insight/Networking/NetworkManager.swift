@@ -140,6 +140,28 @@ final class NetworkManager {
             mainify(completion(.failure(error)))
         }
     }
+    
+    /// completion is always called on main thread
+    func request(handler: RequestHandlable, completion: @escaping (Result<Void, Error>) -> Void) {
+        do {
+            let urlRequest = try handler.makeRequest()
+            
+            let task = session.dataTask(with: urlRequest) { (data, response, error) in
+                if let error = error {
+                    mainify(completion(.failure(error)))
+                }
+                
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                   (200...299).contains(statusCode) {
+                    mainify(completion(.success(())))
+                }
+            }
+            
+            task.resume()
+        } catch {
+            mainify(completion(.failure(error)))
+        }
+    }
 }
 
 func mainify(_ closure: @autoclosure @escaping () -> Void) -> Void  {
