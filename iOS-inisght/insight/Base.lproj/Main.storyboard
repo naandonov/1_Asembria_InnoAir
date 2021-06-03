@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EqF-R4-IIi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="EqF-R4-IIi">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -235,7 +236,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StopCell" rowHeight="110" id="0t3-C6-4tN" customClass="StopTableViewCell" customModule="insight" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="110"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0t3-C6-4tN" id="FvC-bG-ASH">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="110"/>
@@ -355,6 +356,54 @@
             </objects>
             <point key="canvasLocation" x="1805.7971014492755" y="857.8125"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="lpr-7I-No2">
+            <objects>
+                <viewController storyboardIdentifier="PageViewController" id="Iht-Qv-9mL" customClass="PageViewController" customModule="page_control" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Xdo-Ce-sLy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5o6-EL-9mn">
+                                <rect key="frame" x="16" y="60" width="382" height="493"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="За да потвърдите избора си докоснете екрана с един пръст еднократно." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nX2-qy-XEO">
+                                <rect key="frame" x="32" y="633" width="350" height="43"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" systemColor="systemGrayColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="krx-4Z-CpP"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nX2-qy-XEO" firstAttribute="top" secondItem="5o6-EL-9mn" secondAttribute="bottom" constant="80" id="6m3-BE-o5b"/>
+                            <constraint firstItem="5o6-EL-9mn" firstAttribute="top" secondItem="krx-4Z-CpP" secondAttribute="top" constant="16" id="IAJ-qz-aKm"/>
+                            <constraint firstItem="krx-4Z-CpP" firstAttribute="trailing" secondItem="nX2-qy-XEO" secondAttribute="trailing" constant="32" id="UAy-YR-VVG"/>
+                            <constraint firstItem="krx-4Z-CpP" firstAttribute="trailing" secondItem="5o6-EL-9mn" secondAttribute="trailing" constant="16" id="VP2-1I-Owf"/>
+                            <constraint firstItem="5o6-EL-9mn" firstAttribute="leading" secondItem="krx-4Z-CpP" secondAttribute="leading" constant="16" id="cQR-wb-KW0"/>
+                            <constraint firstItem="nX2-qy-XEO" firstAttribute="leading" secondItem="krx-4Z-CpP" secondAttribute="leading" constant="32" id="gfr-DN-SPr"/>
+                            <constraint firstItem="5o6-EL-9mn" firstAttribute="height" secondItem="Xdo-Ce-sLy" secondAttribute="height" multiplier="0.55" id="t7K-ic-aWM"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="nX2-qy-XEO" id="uLp-e1-Q1C"/>
+                        <outlet property="playerView" destination="5o6-EL-9mn" id="ul9-p4-FTs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o3O-mS-14N" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-823" y="1566"/>
+        </scene>
+        <!--Carousel View Controller-->
+        <scene sceneID="up9-SS-8f9">
+            <objects>
+                <pageViewController storyboardIdentifier="CarouselViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" doubleSided="YES" id="Uq1-OT-6e1" customClass="CarouselViewController" customModule="page_control" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Pc5-vB-wtf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="54" y="1566"/>
+        </scene>
     </scenes>
     <resources>
         <image name="activeStep" width="25" height="25"/>
@@ -364,8 +413,14 @@
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemTealColor">
             <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
