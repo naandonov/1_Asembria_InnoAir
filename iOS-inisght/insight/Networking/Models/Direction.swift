@@ -36,6 +36,8 @@ extension Direction {
         let distance: Double
         let travelMode: String // could be enum (walk, bus)
         let publicTransportInformation: PublicTransportInformation?
+        let fromPlace: Place
+        let toPlace: Place
         
         private enum CodingKeys: String, CodingKey {
             case departureTs = "departure_ts"
@@ -43,20 +45,18 @@ extension Direction {
             case travelMode = "travel_mode"
             case publicTransportInformation = "public_transport_information"
             case distance = "distance_m"
+            case fromPlace = "from_place"
+            case toPlace = "to_place"
         }
     }
     
     struct PublicTransportInformation: Decodable {
         let lineName: String
-        let fromPlace: Place
-        let toPlace: Place
         let intermediateStops: [IntermediateStop]
         
         private enum CodingKeys: String, CodingKey {
             case lineName = "line_name"
             case intermediateStops = "intermediate_stops"
-            case fromPlace = "from_place"
-            case toPlace = "to_place"
         }
     }
     
