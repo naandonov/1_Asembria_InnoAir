@@ -20,6 +20,8 @@
 		4E89784D2666C59E0070A1A1 /* StopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89784C2666C59E0070A1A1 /* StopTableViewCell.swift */; };
 		4E8978502666D2520070A1A1 /* DestinationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89784F2666D2520070A1A1 /* DestinationViewController.swift */; };
 		4E8978542666D83A0070A1A1 /* listening.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E8978532666D83A0070A1A1 /* listening.json */; };
+		6E5D40B826697E3A0040C8F9 /* double_finger_double_tap.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D40B726697E3A0040C8F9 /* double_finger_double_tap.mp4 */; };
+		6E5D40BB26697E770040C8F9 /* record_info.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D40BA26697E770040C8F9 /* record_info.mp4 */; };
 		6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9C59926693E990037198C /* PageViewController.swift */; };
 		6EB9C59C26693E9A0037198C /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9C59A26693E9A0037198C /* CarouselViewController.swift */; };
 		6EBD11D02669404A00B7E631 /* double_tap_one_finger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */; };
@@ -53,6 +55,8 @@
 		4E89784C2666C59E0070A1A1 /* StopTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopTableViewCell.swift; sourceTree = "<group>"; };
 		4E89784F2666D2520070A1A1 /* DestinationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationViewController.swift; sourceTree = "<group>"; };
 		4E8978532666D83A0070A1A1 /* listening.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listening.json; sourceTree = "<group>"; };
+		6E5D40B726697E3A0040C8F9 /* double_finger_double_tap.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = double_finger_double_tap.mp4; sourceTree = "<group>"; };
+		6E5D40BA26697E770040C8F9 /* record_info.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_info.mp4; sourceTree = "<group>"; };
 		6EB9C59926693E990037198C /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		6EB9C59A26693E9A0037198C /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = double_tap_one_finger.mp4; sourceTree = "<group>"; };
@@ -156,6 +160,8 @@
 		6EBD11C926693F2400B7E631 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6E5D40BA26697E770040C8F9 /* record_info.mp4 */,
+				6E5D40B726697E3A0040C8F9 /* double_finger_double_tap.mp4 */,
 				6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */,
 				6EBD11CD2669404A00B7E631 /* one_finger_double_tap.mp4 */,
 				6EBD11CE2669404A00B7E631 /* one_tap_one_finger_destination.mp4 */,
@@ -285,6 +291,8 @@
 				6EBD11D12669404A00B7E631 /* swipe.mp4 in Resources */,
 				4E8978542666D83A0070A1A1 /* listening.json in Resources */,
 				6EBD11D32669404A00B7E631 /* one_tap_one_finger_destination.mp4 in Resources */,
+				6E5D40BB26697E770040C8F9 /* record_info.mp4 in Resources */,
+				6E5D40B826697E3A0040C8F9 /* double_finger_double_tap.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
