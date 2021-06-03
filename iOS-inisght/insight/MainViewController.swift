@@ -13,17 +13,19 @@ class MainViewController: UIViewController {
     @IBOutlet private weak var instructionsTitleLabel: UILabel!
     @IBOutlet private weak var instructionsSubtitleLabel: UILabel!
 
+    private lazy var voiceRecorder: VoiceRecorderInputProtocol = VoiceRecorder(output: self)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureContainment()
         startOnboarding()
+        configureGestures()
+    }
 
-        let gesture = UITapGestureRecognizer(target: self,
-                                             action: #selector(onDoubleTapGesture))
-        gesture.numberOfTapsRequired = 2
-        gesture.numberOfTouchesRequired = 2
-        view.addGestureRecognizer(gesture)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        voiceRecorder.requestPermission()
     }
 
     deinit {
@@ -35,10 +37,10 @@ class MainViewController: UIViewController {
     private func startOnboarding() {
         let configurations: [PageViewController.Configuration] = [
             // TODO: Instruction for usage -> Introduction
-            .init(videoFileName: "one_tap_one_finger",
-                  text: "Докоснете екрана веднъж с един пръст, за дa потвърдите вашия избор"),
             .init(videoFileName: "one_tap_one_finger_destination",
                   text: "Докоснете екрана веднъж с един пръст, за да започнете гласовото въвеждане на вашата дестинация"),
+            .init(videoFileName: "one_tap_one_finger",
+                              text: "Докоснете екрана веднъж с един пръст, за дa потвърдите вашия избор"),
             .init(videoFileName: "one_finger_double_tap",
                   text: "Докоснете екрана два пъти с един пръст за анулиране на зададения маршрут"),
             .init(videoFileName: "double_tap_one_finger",
@@ -57,10 +59,6 @@ class MainViewController: UIViewController {
                                           animated: true,
                                           completion: nil)
         }
-    }
-
-    @objc private func onDoubleTapGesture() {
-        startOnboarding()
     }
 
     private func configureUI() {
@@ -119,5 +117,71 @@ private extension MainViewController {
         willMove(toParent: nil)
         containmentView.subviews.forEach { $0.removeFromSuperview() }
         removeFromParent()
+    }
+}
+
+// MARK: - VoiceRecorderOutput
+
+extension MainViewController: VoiceRecorderOutputProtocol {
+    func didRequestPermission(allowed: Bool) {
+        print(#function + " \(allowed)")
+    }
+
+    func didStartRecording() {
+        print(#function)
+    }
+
+    func didFinishRecording(success: Bool) {
+        print(#function)
+    }
+}
+
+// MARK: - Utils (private)
+
+private extension MainViewController {
+    enum GestureName: String {
+        case oneFingerOneTap
+        case twoFingersDoubleTap
+    }
+
+    func configureGestures() {
+        let oneFingerOneTap = UITapGestureRecognizer(target: self,
+                                                     action: #selector(onGestureRecogniserAction(_:)))
+        oneFingerOneTap.numberOfTapsRequired = 1
+        oneFingerOneTap.numberOfTouchesRequired = 1
+        oneFingerOneTap.name = GestureName.oneFingerOneTap.rawValue
+
+        let twoFingersDoubleTap = UITapGestureRecognizer(target: self,
+                                                         action: #selector(onGestureRecogniserAction(_:)))
+        twoFingersDoubleTap.numberOfTapsRequired = 2
+        twoFingersDoubleTap.numberOfTouchesRequired = 2
+        twoFingersDoubleTap.name = GestureName.twoFingersDoubleTap.rawValue
+
+        let gestures = [oneFingerOneTap, twoFingersDoubleTap]
+
+        gestures.forEach {
+            view.addGestureRecognizer($0)
+        }
+    }
+
+    @objc func onGestureRecogniserAction(_ gesture: UIGestureRecognizer) {
+        guard
+            let name = gesture.name,
+            let tag = GestureName(rawValue: name)
+        else {
+            assertionFailure("Missing gesture recognizer tag \(gesture)")
+            return
+        }
+
+        switch tag {
+        case .oneFingerOneTap:
+            if voiceRecorder.isRecording {
+                voiceRecorder.stopRecording()
+            } else {
+                voiceRecorder.startRecording()
+            }
+        case .twoFingersDoubleTap:
+            startOnboarding()
+        }
     }
 }
