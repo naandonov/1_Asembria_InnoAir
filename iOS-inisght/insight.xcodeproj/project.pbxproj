@@ -22,6 +22,8 @@
 		4E8978542666D83A0070A1A1 /* listening.json in Resources */ = {isa = PBXBuildFile; fileRef = 4E8978532666D83A0070A1A1 /* listening.json */; };
 		6E5D40B826697E3A0040C8F9 /* double_finger_double_tap.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D40B726697E3A0040C8F9 /* double_finger_double_tap.mp4 */; };
 		6E5D40BB26697E770040C8F9 /* record_info.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D40BA26697E770040C8F9 /* record_info.mp4 */; };
+		4EE99FB4266953B2000F7C47 /* TrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE99FB3266953B2000F7C47 /* TrackingManager.swift */; };
+		4EE99FB62669543E000F7C47 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE99FB52669543E000F7C47 /* Beacon.swift */; };
 		6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9C59926693E990037198C /* PageViewController.swift */; };
 		6EB9C59C26693E9A0037198C /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9C59A26693E9A0037198C /* CarouselViewController.swift */; };
 		6EBD11D02669404A00B7E631 /* double_tap_one_finger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */; };
@@ -58,6 +60,9 @@
 		4E8978532666D83A0070A1A1 /* listening.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = listening.json; sourceTree = "<group>"; };
 		6E5D40B726697E3A0040C8F9 /* double_finger_double_tap.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = double_finger_double_tap.mp4; sourceTree = "<group>"; };
 		6E5D40BA26697E770040C8F9 /* record_info.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = record_info.mp4; sourceTree = "<group>"; };
+		4EE99FB3266953B2000F7C47 /* TrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingManager.swift; sourceTree = "<group>"; };
+		4EE99FB52669543E000F7C47 /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
+		4EE99FB7266957E3000F7C47 /* nishava.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = nishava.gpx; sourceTree = "<group>"; };
 		6EB9C59926693E990037198C /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		6EB9C59A26693E9A0037198C /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = double_tap_one_finger.mp4; sourceTree = "<group>"; };
@@ -112,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				6EBD11D926694B4E00B7E631 /* VoiceRecorder */,
+				4EE99FB2266953A2000F7C47 /* Tracking */,
 				6EBD11C926693F2400B7E631 /* Resources */,
 				D1ACE46F26692C2200FF618F /* Services */,
 				D130CEEC2668E5CB003C0652 /* Networking */,
@@ -157,6 +163,16 @@
 				4E89784F2666D2520070A1A1 /* DestinationViewController.swift */,
 			);
 			path = Destination;
+			sourceTree = "<group>";
+		};
+		4EE99FB2266953A2000F7C47 /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				4EE99FB3266953B2000F7C47 /* TrackingManager.swift */,
+				4EE99FB52669543E000F7C47 /* Beacon.swift */,
+				4EE99FB7266957E3000F7C47 /* nishava.gpx */,
+			);
+			path = Tracking;
 			sourceTree = "<group>";
 		};
 		6EBD11C926693F2400B7E631 /* Resources */ = {
@@ -338,6 +354,7 @@
 				D1ACE482266984D100FF618F /* InsightAPI.swift in Sources */,
 				D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */,
 				D130CEF72668E69E003C0652 /* StopTimetable.swift in Sources */,
+				4EE99FB62669543E000F7C47 /* Beacon.swift in Sources */,
 				4E89784A2666A11B0070A1A1 /* RouteDetailsViewController.swift in Sources */,
 				D130CEFA2668E715003C0652 /* Geocode.swift in Sources */,
 				4E89784D2666C59E0070A1A1 /* StopTableViewCell.swift in Sources */,
@@ -349,6 +366,7 @@
 				4E89782D266665880070A1A1 /* AppDelegate.swift in Sources */,
 				D1ACE47126692C3700FF618F /* SpeechService.swift in Sources */,
 				4E8978502666D2520070A1A1 /* DestinationViewController.swift in Sources */,
+				4EE99FB4266953B2000F7C47 /* TrackingManager.swift in Sources */,
 				4E89782F266665880070A1A1 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

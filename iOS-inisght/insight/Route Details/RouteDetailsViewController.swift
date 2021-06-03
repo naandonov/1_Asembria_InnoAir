@@ -19,6 +19,20 @@ class RouteDetailsViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureTableView()
+        
+        TrackingManager.shared.requestLocation { location in
+            GoogleAPI.getGeocode(for: "Ветеринарна клиника орион") { result in
+                if case let .success(geocode) = result {
+                    if let endLocation = geocode.results.first?.location {
+                        SofiaTrafficAPI.getDirection(from: Geocode.Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude), to: endLocation) { result in
+                            if case let .success(direction) = result {
+                                print(direction)
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
     
     private func configureTableView() {
