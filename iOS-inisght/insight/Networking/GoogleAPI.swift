@@ -85,15 +85,6 @@ extension GoogleHandler: RequestHandlable {
 
 private extension GoogleHandler {
     func buildSpeechToTextPostData(voiceData: Data, voiceType: VoiceType) -> Data {
-        var voiceParams: [String: Any] = [
-            // All available voices here: https://cloud.google.com/text-to-speech/docs/voices
-            "languageCode": "bg-BG"
-        ]
-        
-        if voiceType != .undefined {
-            voiceParams["name"] = voiceType.rawValue
-        }
-        
         let audioString = voiceData.base64EncodedString()
         
         let params: [String: Any] = [
@@ -101,7 +92,6 @@ private extension GoogleHandler {
                 "content": audioString
             ],
             "config": [
-                // All available formats here: https://cloud.google.com/text-to-speech/docs/reference/rest/v1beta1/text/synthesize#audioencoding
                 "enableAutomaticPunctuation": true,
                 "encoding": "MP3",
                 "languageCode": "bg-BG",
