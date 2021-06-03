@@ -7,6 +7,10 @@
 
 import UIKit
 
+private enum Constants {
+    static let initialOnboardingShown = "initialOnboardingShown"
+}
+
 class MainViewController: UIViewController {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var containmentView: UIView!
@@ -19,7 +23,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         configureUI()
         configureContainment()
-        startOnboarding()
+        startInitialOnboarding()
         configureGestures()
     }
 
@@ -31,33 +35,6 @@ class MainViewController: UIViewController {
     deinit {
         view.gestureRecognizers?.forEach { [weak view] in
             view?.removeGestureRecognizer($0)
-        }
-    }
-
-    private func startOnboarding() {
-        let configurations: [PageViewController.Configuration] = [
-            // TODO: Instruction for usage -> Introduction
-            .init(videoFileName: "one_tap_one_finger_destination",
-                  text: "Докоснете екрана веднъж с един пръст, за да започнете гласовото въвеждане на вашата дестинация"),
-            .init(videoFileName: "one_tap_one_finger",
-                              text: "Докоснете екрана веднъж с един пръст, за дa потвърдите вашия избор"),
-            .init(videoFileName: "one_finger_double_tap",
-                  text: "Докоснете екрана два пъти с един пръст за анулиране на зададения маршрут"),
-            .init(videoFileName: "double_tap_one_finger",
-                  text: "Докоснете екрана два пъти с един пръст за отказ"),
-            .init(videoFileName: "swipe",
-                  text: "Плъзнете вашия пръст от дясно наляво за да повторите гласовото въвеждане")
-            // TODO: Double tap with two fingers
-        ]
-
-        let pages = PagesFactory.makeCarouselPages(from: configurations)
-        if let controller = CarouselViewController.instantiate(pages: pages) {
-            controller.completionHandler = { [weak self] in
-                self?.navigationController?.dismiss(animated: true, completion: {})
-            }
-            navigationController?.present(controller,
-                                          animated: true,
-                                          completion: nil)
         }
     }
 
@@ -120,6 +97,49 @@ private extension MainViewController {
     }
 }
 
+// MARK: - Onboarding
+
+private extension MainViewController {
+    func startOnboarding() {
+        let configurations: [PageViewController.Configuration] = [
+            // TODO: Instruction for usage -> Introduction
+            .init(videoFileName: "one_tap_one_finger_destination",
+                  text: "Докоснете екрана веднъж с един пръст, за да започнете гласовото въвеждане на вашата дестинация"),
+            .init(videoFileName: "one_tap_one_finger",
+                  text: "Докоснете екрана веднъж с един пръст, за дa потвърдите вашия избор"),
+            .init(videoFileName: "one_finger_double_tap",
+                  text: "Докоснете екрана два пъти с един пръст за анулиране на зададения маршрут"),
+            .init(videoFileName: "double_tap_one_finger",
+                  text: "Докоснете екрана два пъти с един пръст за отказ"),
+            .init(videoFileName: "swipe",
+                  text: "Плъзнете вашия пръст от дясно наляво за да повторите гласовото въвеждане"),
+            .init(videoFileName: "double_finger_double_tap", text: "За да чуете инструкциите за употреба, докоснете екрана два пъти с два пръста.")
+        ]
+
+        showOnboarding(configurations: configurations)
+    }
+
+    func startInitialOnboarding() {
+        guard UserDefaults.standard.bool(forKey: Constants.initialOnboardingShown) == false else {
+            return
+        }
+        UserDefaults.standard.set(true, forKey: Constants.initialOnboardingShown)
+        showOnboarding(configurations: [.init(videoFileName: "record_info", text: "Докоснете екрана веднъж с един пръст за да започнете гласовото въвеждане на вашата дестинация и докоснете екрана още веднъж, за да приключите.")])
+    }
+
+    func showOnboarding(configurations: [PageViewController.Configuration]) {
+        let pages = PagesFactory.makeCarouselPages(from: configurations)
+        if let controller = CarouselViewController.instantiate(pages: pages) {
+            controller.completionHandler = { [weak self] in
+                self?.navigationController?.dismiss(animated: true, completion: {})
+            }
+            navigationController?.present(controller,
+                                          animated: true,
+                                          completion: nil)
+        }
+    }
+}
+
 // MARK: - VoiceRecorderOutput
 
 extension MainViewController: VoiceRecorderOutputProtocol {
@@ -135,7 +155,6 @@ extension MainViewController: VoiceRecorderOutputProtocol {
         print(#function)
         if success,
            let voiceData = voiceRecorder.voiceData {
-            
             SpeechService.shared.text(voiceData: voiceData) { result in
                 print(result)
             }
