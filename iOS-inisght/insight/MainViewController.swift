@@ -133,6 +133,13 @@ extension MainViewController: VoiceRecorderOutputProtocol {
 
     func didFinishRecording(success: Bool) {
         print(#function)
+        if success,
+           let voiceData = voiceRecorder.voiceData {
+            
+            SpeechService.shared.text(voiceData: voiceData) { result in
+                print(result)
+            }
+        }
     }
 }
 

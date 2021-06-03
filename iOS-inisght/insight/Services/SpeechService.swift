@@ -27,7 +27,7 @@ class SpeechService: NSObject, AVAudioPlayerDelegate {
                                    completion: { result in
                                     switch result {
                                     case .success(let value):
-                                        completion(value)
+                                        completion(value.results.first)
                                     case .failure:
                                         completion(nil)
                                     }

@@ -13,6 +13,7 @@ private enum GoogleAPIStrings {
     static let geocodingPath = "/maps/api/geocode/json"
     static let geocodingQueryParameter = "?address=%@&key=%@"
     static let ttsAPIUrl = "https://texttospeech.googleapis.com/v1beta1/text:synthesize"
+    static let sttAPIUrl = "https://speech.googleapis.com/v1p1beta1/speech:recognize"
 }
 
 enum GoogleAPI {
@@ -34,7 +35,7 @@ enum GoogleAPI {
     
     static func postSpeechToText(voiceData: Data,
                                  voiceType: VoiceType,
-                                 completion: @escaping (Result<SpeechRecognition, Error>) -> Void) {
+                                 completion: @escaping (Result<GoogleResults<SpeechRecognition>, Error>) -> Void) {
         let handler = GoogleHandler.speechToText(voiceData, voiceType)
         NetworkManager.shared.request(handler: handler, completion: completion)
     }
@@ -68,7 +69,7 @@ extension GoogleHandler: RequestHandlable {
             request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             return request
         case .speechToText(let data, let voiceType):
-            var request = try URLRequest.makeEncodedRequest(urlString: GoogleAPIStrings.ttsAPIUrl)
+            var request = try URLRequest.makeEncodedRequest(urlString: GoogleAPIStrings.sttAPIUrl)
             request.httpMethod = "POST"
             request.httpBody = buildSpeechToTextPostData(voiceData: data, voiceType: voiceType)
             request.addValue(GoogleAPIStrings.apiKey, forHTTPHeaderField: "X-Goog-Api-Key")
@@ -102,9 +103,10 @@ private extension GoogleHandler {
             "config": [
                 // All available formats here: https://cloud.google.com/text-to-speech/docs/reference/rest/v1beta1/text/synthesize#audioencoding
                 "enableAutomaticPunctuation": true,
-                "encoding": "LINEAR16",
+                "encoding": "MP3",
                 "languageCode": "bg-BG",
-                "model": "default"
+                "model": "default",
+                "sampleRateHertz": 16000
             ]
         ]
 
@@ -148,8 +150,8 @@ struct TextToSpeech: Decodable {
 }
 
 struct SpeechRecognition: Decodable {
-    let alternatives: [Alternative]
-    let languageCode: String
+    let alternatives: [Alternative]?
+    let languageCode: String?
 }
 
 extension SpeechRecognition {
