@@ -339,17 +339,40 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="listening"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4tk-xL-ROh">
+                                <rect key="frame" x="20" y="128" width="374" height="49"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Слушане" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sl5-WT-yER">
+                                        <rect key="frame" x="0.0" y="0.0" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Слушане" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xo4-4g-XOA">
+                                        <rect key="frame" x="0.0" y="28.5" width="374" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ssu-W0-NHu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="4tk-xL-ROh" firstAttribute="top" secondItem="ssu-W0-NHu" secondAttribute="top" constant="40" id="4HW-AM-3cW"/>
+                            <constraint firstItem="ssu-W0-NHu" firstAttribute="trailing" secondItem="4tk-xL-ROh" secondAttribute="trailing" constant="20" id="Dqt-or-tic"/>
+                            <constraint firstItem="4tk-xL-ROh" firstAttribute="leading" secondItem="ssu-W0-NHu" secondAttribute="leading" constant="20" id="EAd-YH-VcY"/>
                             <constraint firstItem="Y5O-dE-Jy4" firstAttribute="centerX" secondItem="CQj-I8-23q" secondAttribute="centerX" id="GpZ-rR-aOO"/>
+                            <constraint firstItem="4tk-xL-ROh" firstAttribute="centerX" secondItem="ssu-W0-NHu" secondAttribute="centerX" id="RqF-zp-WbU"/>
                             <constraint firstItem="Y5O-dE-Jy4" firstAttribute="centerY" secondItem="CQj-I8-23q" secondAttribute="centerY" id="iOZ-St-6UE"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SO6-vg-rJZ"/>
                     <connections>
                         <outlet property="lottieView" destination="Y5O-dE-Jy4" id="ObW-Jf-Ubs"/>
+                        <outlet property="subtitleLabel" destination="xo4-4g-XOA" id="win-Xf-Iii"/>
+                        <outlet property="titleLabel" destination="Sl5-WT-yER" id="eVU-uI-9HE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ju4-9s-17t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -359,7 +382,7 @@
         <!--Page View Controller-->
         <scene sceneID="lpr-7I-No2">
             <objects>
-                <viewController storyboardIdentifier="PageViewController" id="Iht-Qv-9mL" customClass="PageViewController" customModule="page_control" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageViewController" id="Iht-Qv-9mL" customClass="PageViewController" customModule="insight" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Xdo-Ce-sLy">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -399,7 +422,7 @@
         <!--Carousel View Controller-->
         <scene sceneID="up9-SS-8f9">
             <objects>
-                <pageViewController storyboardIdentifier="CarouselViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" doubleSided="YES" id="Uq1-OT-6e1" customClass="CarouselViewController" customModule="page_control" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="CarouselViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" doubleSided="YES" id="Uq1-OT-6e1" customClass="CarouselViewController" customModule="insight" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pc5-vB-wtf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="54" y="1566"/>

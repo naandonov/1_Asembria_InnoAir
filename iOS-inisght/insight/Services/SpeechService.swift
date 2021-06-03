@@ -46,14 +46,13 @@ class SpeechService: NSObject, AVAudioPlayerDelegate {
             switch result {
             case .success(let data):
                 completion(data)
-//                self?.completionHandler = completion
-//                self?.player = try! AVAudioPlayer(data: data!)
-//                self?.player?.delegate = self
-//                self?.player!.play()
+                self?.completionHandler = completion
+                self?.player = try! AVAudioPlayer(data: data!)
+                self?.player?.delegate = self
+                self?.player!.play()
             case .failure:
                 self?.busy = false
                 completion(nil)
-
             }
         }
     }
