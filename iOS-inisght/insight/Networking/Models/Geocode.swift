@@ -38,8 +38,8 @@ struct Geocode: Decodable {
 
 extension Geocode {
     struct Location: Decodable {
-        let lat: String
-        let lng: String
+        let lat: Double
+        let lng: Double
         
         var locationString: String {
             "\(lat),\(lng)"
