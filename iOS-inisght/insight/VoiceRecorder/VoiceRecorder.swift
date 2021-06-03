@@ -18,6 +18,7 @@ protocol VoiceRecorderInputProtocol {
     func startRecording()
     func stopRecording()
     func requestPermission()
+    var voiceData: Data? { get }
 }
 
 protocol VoiceRecorderOutputProtocol: AnyObject {
@@ -109,5 +110,10 @@ extension VoiceRecorder: VoiceRecorderInputProtocol {
         } catch {
             debugPrint(error.localizedDescription)
         }
+    }
+    
+    var voiceData: Data? {
+        let url = getDocumentsDirectory().appendingPathComponent("recording.m4a")
+        return try? Data(contentsOf: url)
     }
 }
