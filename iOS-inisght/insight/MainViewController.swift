@@ -11,11 +11,13 @@ private enum Constants {
     static let initialOnboardingShown = "initialOnboardingShown"
 }
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var containmentView: UIView!
     @IBOutlet private weak var instructionsTitleLabel: UILabel!
     @IBOutlet private weak var instructionsSubtitleLabel: UILabel!
+
+    private weak var containmentNavigationController: UINavigationController?
 
     private lazy var voiceRecorder: VoiceRecorderInputProtocol = VoiceRecorder(output: self)
 
@@ -72,8 +74,11 @@ class MainViewController: UIViewController {
         let containmentNavigationController: UINavigationController = .containmentNavigationController
         containmentNavigationController.setNavigationBarHidden(true, animated: false)
         add(containmentNavigationController)
+        self.containmentNavigationController = containmentNavigationController
     }
 }
+
+// MARK: - Child View Controllers
 
 private extension MainViewController {
     func add(_ child: UIViewController) {
@@ -155,8 +160,28 @@ extension MainViewController: VoiceRecorderOutputProtocol {
         print(#function)
         if success,
            let voiceData = voiceRecorder.voiceData {
-            SpeechService.shared.text(voiceData: voiceData) { result in
-                print(result)
+            SpeechService.shared.text(voiceData: voiceData) { [weak containmentNavigationController] result in
+                guard let navigation = containmentNavigationController,
+                      let destination = navigation.topViewController as? DestinationViewController else {
+                    return
+                }
+
+                guard let resultText = result?.alternatives?.first?.transcript else {
+                    destination.configuration = .destination("Оппс, грешка!")
+                    return
+                }
+
+                destination.configuration = .destination(resultText)
+
+                SpeechService.shared.speak(text: """
+                        Вие избрахте дестинация - \(resultText).
+                        За да потвърдите избора си, моля докоснете веднъж екрана.
+                        Докоснете екрана два пъти с един пръст за отказ.
+                        Плъзнете вашия пръст от дясно наляво за да повторите гласовото въвеждане.
+                        """,
+                                           completion: { data in
+                                            // TODO: Notification
+                                           })
             }
         }
     }
@@ -201,9 +226,15 @@ private extension MainViewController {
 
         switch tag {
         case .oneFingerOneTap:
+            guard let navigation = containmentNavigationController,
+                  let destination = navigation.topViewController as? DestinationViewController else {
+                return
+            }
             if voiceRecorder.isRecording {
+                destination.configuration = .ready
                 voiceRecorder.stopRecording()
             } else {
+                destination.configuration = .listening
                 voiceRecorder.startRecording()
             }
         case .twoFingersDoubleTap:
