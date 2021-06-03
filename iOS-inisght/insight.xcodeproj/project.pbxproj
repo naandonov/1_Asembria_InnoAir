@@ -42,6 +42,7 @@
 		D1ACE47126692C3700FF618F /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE47026692C3700FF618F /* SpeechService.swift */; };
 		D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE47426692D7400FF618F /* GoogleAPI.swift */; };
 		D1ACE482266984D100FF618F /* InsightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE481266984D100FF618F /* InsightAPI.swift */; };
+		D1ACE48B26699C4200FF618F /* UIView+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE48A26699C4200FF618F /* UIView+Loading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		D1ACE47026692C3700FF618F /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		D1ACE47426692D7400FF618F /* GoogleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAPI.swift; sourceTree = "<group>"; };
 		D1ACE481266984D100FF618F /* InsightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightAPI.swift; sourceTree = "<group>"; };
+		D1ACE48A26699C4200FF618F /* UIView+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Loading.swift"; sourceTree = "<group>"; };
 		DB0C677B155BBF6C5F68E39A /* Pods-insight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-insight.release.xcconfig"; path = "Target Support Files/Pods-insight/Pods-insight.release.xcconfig"; sourceTree = "<group>"; };
 		E45313F6CDDA334E65FC8FCC /* libPods-insight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-insight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -148,6 +150,7 @@
 				4E89784326666ABC0070A1A1 /* UIFont+Additions.swift */,
 				4E897847266695C90070A1A1 /* UIViewController+Factory.swift */,
 				4EE99FBC26699850000F7C47 /* StorageManager.swift */,
+				D1ACE48A26699C4200FF618F /* UIView+Loading.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E89784426666ABC0070A1A1 /* UIFont+Additions.swift in Sources */,
+				D1ACE48B26699C4200FF618F /* UIView+Loading.swift in Sources */,
 				6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */,
 				4E8978422666692B0070A1A1 /* UIColor+Additions.swift in Sources */,
 				4EE99FBD26699850000F7C47 /* StorageManager.swift in Sources */,
