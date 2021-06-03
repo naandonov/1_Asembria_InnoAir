@@ -14,13 +14,6 @@ private enum SofiaTrafficAPIStrings {
     static let queryParameter = "?arrive_by=0&from_place=%@&itineraries_requested_count=1&lang=bg&optimization=fastest&planning_ts=%@&skipped_travel_options=bicycle,taxi,walk&to_place=%@"
 }
 
-private enum GoogleAPIStrings {
-    static let googleApiKey = "AIzaSyD5biGZkfEAZU8IkM_H1t7HCv_7s5Qim68"
-    static let googleBaseURLString = "https://maps.googleapis.com"
-    static let geocodingPath = "/maps/api/geocode/json"
-    static let geocodingQueryParameter = "?address=%@&key=%@"
-}
-
 protocol RequestHandlable {
     func makeRequest() throws -> URLRequest
     var decoder: JSONDecoder { get }
@@ -41,14 +34,6 @@ extension DateFormatter {
     }
 }
 
-enum GoogleAPI {
-    static func getGeocode(for address: String,
-                           completion: @escaping (Result<GoogleResults<Geocode>, Error>) -> Void) {
-        let handler = GoogleHandler.geocode(address)
-        NetworkManager.shared.request(handler: handler, completion: completion)
-    }
-}
-
 enum SofiaTrafficAPI {
     static func getDirection(from startLocation: Geocode.Location,
                              to endLocation: Geocode.Location,
@@ -63,32 +48,6 @@ enum SofiaTrafficAPI {
         let request = SofiaTrafficHandler.timetable(stopId)
         NetworkManager.shared.request(handler: request,
                                       completion: completion)
-    }
-}
-
-enum GoogleHandler {
-    case geocode(String)
-}
-
-extension GoogleHandler: RequestHandlable {
-    func makeRequest() throws -> URLRequest {
-        switch self {
-        case .geocode(let address):
-            let addr = address.replacingOccurrences(of: " ", with: "+")
-            let parameters = String(format: GoogleAPIStrings.geocodingQueryParameter,
-                                    addr,
-                                    GoogleAPIStrings.googleApiKey)
-            let urlString = [GoogleAPIStrings.googleBaseURLString,
-                             GoogleAPIStrings.geocodingPath,
-                             parameters]
-                .reduce("", { result, component in result + component })
-            
-            return try URLRequest.makeEncodedRequest(urlString: urlString)
-        }
-    }
-    
-    var decoder: JSONDecoder {
-        return JSONDecoder()
     }
 }
 
