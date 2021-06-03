@@ -15,13 +15,15 @@ class RouteDetailsViewController: UIViewController {
     @IBOutlet private weak var transportLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     
+    var destionation: String? = "Ветеринарна клиника орион"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureTableView()
         
-        TrackingManager.shared.requestLocation { location in
-            GoogleAPI.getGeocode(for: "Ветеринарна клиника орион") { result in
+        TrackingManager.shared.requestLocation { [weak self] location in
+            GoogleAPI.getGeocode(for: self?.destionation ?? "") { result in
                 if case let .success(geocode) = result {
                     if let endLocation = geocode.results.first?.location {
                         SofiaTrafficAPI.getDirection(from: Geocode.Location(lat: location.coordinate.latitude, lng: location.coordinate.longitude), to: endLocation) { result in

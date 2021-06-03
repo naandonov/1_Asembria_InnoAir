@@ -24,6 +24,8 @@
 		6E5D40BB26697E770040C8F9 /* record_info.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6E5D40BA26697E770040C8F9 /* record_info.mp4 */; };
 		4EE99FB4266953B2000F7C47 /* TrackingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE99FB3266953B2000F7C47 /* TrackingManager.swift */; };
 		4EE99FB62669543E000F7C47 /* Beacon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE99FB52669543E000F7C47 /* Beacon.swift */; };
+		4EE99FBD26699850000F7C47 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE99FBC26699850000F7C47 /* StorageManager.swift */; };
+		4EE99FBF266998EE000F7C47 /* RouteDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE99FBE266998EE000F7C47 /* RouteDescriptor.swift */; };
 		6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9C59926693E990037198C /* PageViewController.swift */; };
 		6EB9C59C26693E9A0037198C /* CarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB9C59A26693E9A0037198C /* CarouselViewController.swift */; };
 		6EBD11D02669404A00B7E631 /* double_tap_one_finger.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */; };
@@ -63,6 +65,8 @@
 		4EE99FB3266953B2000F7C47 /* TrackingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingManager.swift; sourceTree = "<group>"; };
 		4EE99FB52669543E000F7C47 /* Beacon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacon.swift; sourceTree = "<group>"; };
 		4EE99FB7266957E3000F7C47 /* nishava.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = nishava.gpx; sourceTree = "<group>"; };
+		4EE99FBC26699850000F7C47 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		4EE99FBE266998EE000F7C47 /* RouteDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDescriptor.swift; sourceTree = "<group>"; };
 		6EB9C59926693E990037198C /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		6EB9C59A26693E9A0037198C /* CarouselViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselViewController.swift; sourceTree = "<group>"; };
 		6EBD11CB2669404A00B7E631 /* double_tap_one_finger.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = double_tap_one_finger.mp4; sourceTree = "<group>"; };
@@ -143,6 +147,7 @@
 				4E8978412666692B0070A1A1 /* UIColor+Additions.swift */,
 				4E89784326666ABC0070A1A1 /* UIFont+Additions.swift */,
 				4E897847266695C90070A1A1 /* UIViewController+Factory.swift */,
+				4EE99FBC26699850000F7C47 /* StorageManager.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 			children = (
 				4E8978492666A11B0070A1A1 /* RouteDetailsViewController.swift */,
 				4E89784C2666C59E0070A1A1 /* StopTableViewCell.swift */,
+				4EE99FBE266998EE000F7C47 /* RouteDescriptor.swift */,
 			);
 			path = "Route Details";
 			sourceTree = "<group>";
@@ -350,12 +356,14 @@
 				4E89784426666ABC0070A1A1 /* UIFont+Additions.swift in Sources */,
 				6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */,
 				4E8978422666692B0070A1A1 /* UIColor+Additions.swift in Sources */,
+				4EE99FBD26699850000F7C47 /* StorageManager.swift in Sources */,
 				D130CEEF2668E600003C0652 /* NetworkManager.swift in Sources */,
 				D1ACE482266984D100FF618F /* InsightAPI.swift in Sources */,
 				D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */,
 				D130CEF72668E69E003C0652 /* StopTimetable.swift in Sources */,
 				4EE99FB62669543E000F7C47 /* Beacon.swift in Sources */,
 				4E89784A2666A11B0070A1A1 /* RouteDetailsViewController.swift in Sources */,
+				4EE99FBF266998EE000F7C47 /* RouteDescriptor.swift in Sources */,
 				D130CEFA2668E715003C0652 /* Geocode.swift in Sources */,
 				4E89784D2666C59E0070A1A1 /* StopTableViewCell.swift in Sources */,
 				4E89784626666C030070A1A1 /* MainViewController.swift in Sources */,
