@@ -55,7 +55,7 @@ class StopTableViewCell: UITableViewCell {
         }
         switch progress {
         case .passed:
-            nameLabel.textColor = .primaryGray
+            nameLabel.textColor = .ternaryGray
             nameLabel.font = .secondaryTitleFont
         case .current:
             nameLabel.textColor = .primaryBlue

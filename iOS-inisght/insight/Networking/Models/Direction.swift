@@ -36,8 +36,8 @@ extension Direction {
         let distance: Double
         let travelMode: String // could be enum (walk, bus)
         let publicTransportInformation: PublicTransportInformation?
-        let fromPlace: Place
-        let toPlace: Place
+        let fromPlace: Stop
+        let toPlace: Stop
         
         private enum CodingKeys: String, CodingKey {
             case departureTs = "departure_ts"
@@ -52,7 +52,7 @@ extension Direction {
     
     struct PublicTransportInformation: Decodable {
         let lineName: String
-        let intermediateStops: [IntermediateStop]
+        let intermediateStops: [Stop]
         
         private enum CodingKeys: String, CodingKey {
             case lineName = "line_name"
@@ -64,10 +64,10 @@ extension Direction {
         let name: String
     }
     
-    struct IntermediateStop: Decodable {
+    struct Stop: Decodable {
         let name: String
         let placeType: String // could be enum (stop)
-        let stopId: String
+        let stopId: String?
         
         private enum CodingKeys: String, CodingKey {
             case name
@@ -84,9 +84,10 @@ extension Direction {
             
             name = try container.decode(String.self, forKey: .name)
             placeType = try container.decode(String.self, forKey: .placeType)
-            let stopInfo = try container.nestedContainer(keyedBy: StopInfoCodingKeys.self, forKey: .stopInfo)
             
-            stopId = try stopInfo.decode(String.self, forKey: .stopId)
+            
+            let stopInfo = try? container.nestedContainer(keyedBy: StopInfoCodingKeys.self, forKey: .stopInfo)
+            stopId = try stopInfo?.decode(String.self, forKey: .stopId) ?? nil
         }
     }
     
