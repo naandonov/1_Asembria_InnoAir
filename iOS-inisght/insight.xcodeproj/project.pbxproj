@@ -33,6 +33,8 @@
 		D130CEF32668E647003C0652 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D130CEF22668E647003C0652 /* Direction.swift */; };
 		D130CEF72668E69E003C0652 /* StopTimetable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D130CEF62668E69E003C0652 /* StopTimetable.swift */; };
 		D130CEFA2668E715003C0652 /* Geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D130CEF92668E715003C0652 /* Geocode.swift */; };
+		D1ACE47126692C3700FF618F /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE47026692C3700FF618F /* SpeechService.swift */; };
+		D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE47426692D7400FF618F /* GoogleAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		D130CEF22668E647003C0652 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		D130CEF62668E69E003C0652 /* StopTimetable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopTimetable.swift; sourceTree = "<group>"; };
 		D130CEF92668E715003C0652 /* Geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocode.swift; sourceTree = "<group>"; };
+		D1ACE47026692C3700FF618F /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
+		D1ACE47426692D7400FF618F /* GoogleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAPI.swift; sourceTree = "<group>"; };
 		DB0C677B155BBF6C5F68E39A /* Pods-insight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-insight.release.xcconfig"; path = "Target Support Files/Pods-insight/Pods-insight.release.xcconfig"; sourceTree = "<group>"; };
 		E45313F6CDDA334E65FC8FCC /* libPods-insight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-insight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -103,6 +107,7 @@
 			children = (
 				6EBD11D926694B4E00B7E631 /* VoiceRecorder */,
 				6EBD11C926693F2400B7E631 /* Resources */,
+				D1ACE46F26692C2200FF618F /* Services */,
 				D130CEEC2668E5CB003C0652 /* Networking */,
 				4E89784E2666D22F0070A1A1 /* Destination */,
 				4E897840266665910070A1A1 /* Utilities */,
@@ -190,6 +195,7 @@
 			children = (
 				D130CEF12668E636003C0652 /* Models */,
 				D130CEEE2668E600003C0652 /* NetworkManager.swift */,
+				D1ACE47426692D7400FF618F /* GoogleAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -202,6 +208,14 @@
 				D130CEF92668E715003C0652 /* Geocode.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D1ACE46F26692C2200FF618F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D1ACE47026692C3700FF618F /* SpeechService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,6 +324,7 @@
 				6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */,
 				4E8978422666692B0070A1A1 /* UIColor+Additions.swift in Sources */,
 				D130CEEF2668E600003C0652 /* NetworkManager.swift in Sources */,
+				D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */,
 				D130CEF72668E69E003C0652 /* StopTimetable.swift in Sources */,
 				4E89784A2666A11B0070A1A1 /* RouteDetailsViewController.swift in Sources */,
 				D130CEFA2668E715003C0652 /* Geocode.swift in Sources */,
@@ -320,6 +335,7 @@
 				6EB9C59C26693E9A0037198C /* CarouselViewController.swift in Sources */,
 				4E897848266695C90070A1A1 /* UIViewController+Factory.swift in Sources */,
 				4E89782D266665880070A1A1 /* AppDelegate.swift in Sources */,
+				D1ACE47126692C3700FF618F /* SpeechService.swift in Sources */,
 				4E8978502666D2520070A1A1 /* DestinationViewController.swift in Sources */,
 				4E89782F266665880070A1A1 /* SceneDelegate.swift in Sources */,
 			);
