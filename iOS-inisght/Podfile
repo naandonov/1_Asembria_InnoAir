@@ -1,0 +1,4 @@
+target 'insight' do
+
+  pod 'lottie-ios', '~> 3.2.3'
+end

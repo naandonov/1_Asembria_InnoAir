@@ -1,0 +1,6 @@
+module Pods_insight {
+  umbrella header "Pods-insight-umbrella.h"
+
+  export *
+  module * { export * }
+}
