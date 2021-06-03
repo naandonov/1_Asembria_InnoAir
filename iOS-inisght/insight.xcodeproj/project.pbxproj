@@ -37,6 +37,7 @@
 		D130CEFA2668E715003C0652 /* Geocode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D130CEF92668E715003C0652 /* Geocode.swift */; };
 		D1ACE47126692C3700FF618F /* SpeechService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE47026692C3700FF618F /* SpeechService.swift */; };
 		D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE47426692D7400FF618F /* GoogleAPI.swift */; };
+		D1ACE482266984D100FF618F /* InsightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1ACE481266984D100FF618F /* InsightAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +73,7 @@
 		D130CEF92668E715003C0652 /* Geocode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geocode.swift; sourceTree = "<group>"; };
 		D1ACE47026692C3700FF618F /* SpeechService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechService.swift; sourceTree = "<group>"; };
 		D1ACE47426692D7400FF618F /* GoogleAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAPI.swift; sourceTree = "<group>"; };
+		D1ACE481266984D100FF618F /* InsightAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsightAPI.swift; sourceTree = "<group>"; };
 		DB0C677B155BBF6C5F68E39A /* Pods-insight.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-insight.release.xcconfig"; path = "Target Support Files/Pods-insight/Pods-insight.release.xcconfig"; sourceTree = "<group>"; };
 		E45313F6CDDA334E65FC8FCC /* libPods-insight.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-insight.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -202,6 +204,7 @@
 				D130CEF12668E636003C0652 /* Models */,
 				D130CEEE2668E600003C0652 /* NetworkManager.swift */,
 				D1ACE47426692D7400FF618F /* GoogleAPI.swift */,
+				D1ACE481266984D100FF618F /* InsightAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				6EB9C59B26693E9A0037198C /* PageViewController.swift in Sources */,
 				4E8978422666692B0070A1A1 /* UIColor+Additions.swift in Sources */,
 				D130CEEF2668E600003C0652 /* NetworkManager.swift in Sources */,
+				D1ACE482266984D100FF618F /* InsightAPI.swift in Sources */,
 				D1ACE47526692D7400FF618F /* GoogleAPI.swift in Sources */,
 				D130CEF72668E69E003C0652 /* StopTimetable.swift in Sources */,
 				4E89784A2666A11B0070A1A1 /* RouteDetailsViewController.swift in Sources */,
