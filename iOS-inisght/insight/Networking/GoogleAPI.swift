@@ -22,20 +22,28 @@ enum GoogleAPI {
         NetworkManager.shared.request(handler: handler, completion: completion)
     }
     
-    static func postSpeechToText(_ text: String,
+    static func postTextToSpeech(_ text: String,
                                  voiceType: VoiceType,
                                  completion: @escaping (Result<Data?, Error>) -> Void) {
-        let handler = GoogleHandler.speechToText(text, voiceType)
+        let handler = GoogleHandler.textToSpeech(text, voiceType)
         NetworkManager.shared.request(handler: handler) { (result: Result<TextToSpeech, Error>) -> Void in
             let mappedResult = result.map { Data(base64Encoded: $0.audioContent)}
             completion(mappedResult)
         }
     }
+    
+    static func postSpeechToText(voiceData: Data,
+                                 voiceType: VoiceType,
+                                 completion: @escaping (Result<SpeechRecognition, Error>) -> Void) {
+        let handler = GoogleHandler.speechToText(voiceData, voiceType)
+        NetworkManager.shared.request(handler: handler, completion: completion)
+    }
 }
 
 enum GoogleHandler {
     case geocode(String)
-    case speechToText(String, VoiceType)
+    case textToSpeech(String, VoiceType)
+    case speechToText(Data, VoiceType)
 }
 
 extension GoogleHandler: RequestHandlable {
@@ -52,10 +60,17 @@ extension GoogleHandler: RequestHandlable {
                 .reduce("", { result, component in result + component })
             
             return try URLRequest.makeEncodedRequest(urlString: urlString)
-        case .speechToText(let text, let voiceType):
+        case .textToSpeech(let text, let voiceType):
             var request = try URLRequest.makeEncodedRequest(urlString: GoogleAPIStrings.ttsAPIUrl)
             request.httpMethod = "POST"
             request.httpBody = buildPostData(text: text, voiceType: voiceType)
+            request.addValue(GoogleAPIStrings.apiKey, forHTTPHeaderField: "X-Goog-Api-Key")
+            request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+            return request
+        case .speechToText(let data, let voiceType):
+            var request = try URLRequest.makeEncodedRequest(urlString: GoogleAPIStrings.ttsAPIUrl)
+            request.httpMethod = "POST"
+            request.httpBody = buildSpeechToTextPostData(voiceData: data, voiceType: voiceType)
             request.addValue(GoogleAPIStrings.apiKey, forHTTPHeaderField: "X-Goog-Api-Key")
             request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             return request
@@ -68,6 +83,36 @@ extension GoogleHandler: RequestHandlable {
 }
 
 private extension GoogleHandler {
+    func buildSpeechToTextPostData(voiceData: Data, voiceType: VoiceType) -> Data {
+        var voiceParams: [String: Any] = [
+            // All available voices here: https://cloud.google.com/text-to-speech/docs/voices
+            "languageCode": "bg-BG"
+        ]
+        
+        if voiceType != .undefined {
+            voiceParams["name"] = voiceType.rawValue
+        }
+        
+        let audioString = voiceData.base64EncodedString()
+        
+        let params: [String: Any] = [
+            "audio": [
+                "content": audioString
+            ],
+            "config": [
+                // All available formats here: https://cloud.google.com/text-to-speech/docs/reference/rest/v1beta1/text/synthesize#audioencoding
+                "enableAutomaticPunctuation": true,
+                "encoding": "LINEAR16",
+                "languageCode": "bg-BG",
+                "model": "default"
+            ]
+        ]
+
+        // Convert the Dictionary to Data
+        let data = try! JSONSerialization.data(withJSONObject: params)
+        return data
+    }
+    
     func buildPostData(text: String, voiceType: VoiceType) -> Data {
         
         var voiceParams: [String: Any] = [
@@ -100,4 +145,16 @@ private extension GoogleHandler {
 
 struct TextToSpeech: Decodable {
     let audioContent: String
+}
+
+struct SpeechRecognition: Decodable {
+    let alternatives: [Alternative]
+    let languageCode: String
+}
+
+extension SpeechRecognition {
+    struct Alternative: Decodable {
+        let transcript: String
+        let confidence: Double
+    }
 }

@@ -21,6 +21,19 @@ class SpeechService: NSObject, AVAudioPlayerDelegate {
     private var player: AVAudioPlayer?
     private var completionHandler: ((Data) -> Void)?
     
+    func text(voiceData: Data, voiceType: VoiceType = .standardBg, completion: @escaping (SpeechRecognition?) -> Void) {
+        GoogleAPI.postSpeechToText(voiceData: voiceData,
+                                   voiceType: voiceType,
+                                   completion: { result in
+                                    switch result {
+                                    case .success(let value):
+                                        completion(value)
+                                    case .failure:
+                                        completion(nil)
+                                    }
+                                   })
+    }
+    
     func speak(text: String, voiceType: VoiceType = .standardBg, completion: @escaping (Data?) -> Void) {
         guard !self.busy else {
             print("Speech Service busy!")
@@ -29,14 +42,14 @@ class SpeechService: NSObject, AVAudioPlayerDelegate {
         
         self.busy = true
         
-        GoogleAPI.postSpeechToText(text, voiceType: voiceType) { [weak self] result in
+        GoogleAPI.postTextToSpeech(text, voiceType: voiceType) { [weak self] result in
             switch result {
             case .success(let data):
                 completion(data)
-                self?.completionHandler = completion
-                self?.player = try! AVAudioPlayer(data: data!)
-                self?.player?.delegate = self
-                self?.player!.play()
+//                self?.completionHandler = completion
+//                self?.player = try! AVAudioPlayer(data: data!)
+//                self?.player?.delegate = self
+//                self?.player!.play()
             case .failure:
                 self?.busy = false
                 completion(nil)
