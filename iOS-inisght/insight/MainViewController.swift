@@ -226,6 +226,8 @@ private extension MainViewController {
             assertionFailure("Missing gesture recognizer tag \(gesture)")
             return
         }
+        
+        SpeechService.shared.stop()
 
         switch tag {
         case .oneFingerOneTap:
