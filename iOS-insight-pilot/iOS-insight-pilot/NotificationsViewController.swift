@@ -11,6 +11,8 @@ final class NotificationsViewController: UIViewController {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var containmentView: UIView!
     @IBOutlet private weak var footerLabel: UILabel!
+    @IBOutlet private weak var firstImageView: UIImageView!
+    @IBOutlet private weak var secondImageView: UIImageView!
 
     var number: String?
     var travelMode: TransportType?
@@ -38,18 +40,41 @@ final class NotificationsViewController: UIViewController {
         containmentView.layer.cornerRadius = 30
         containmentView.clipsToBounds = true
 
-        footerLabel.text = travelMode?.bgString
+        footerLabel.text = (travelMode?.bgString ?? "") + " " + (number ?? "")
         footerLabel.font = .secondaryTitleFont
         footerLabel.textColor = .textColor
+
+        firstImageView.isHidden = true
+        secondImageView.isHidden = true
 
         fetchData()
     }
 
     private func fetchData() {
-        InsightAPI.setStopInfo(.init(travelMode: travelMode?.string, lineName: number!),
+        guard let string = travelMode?.string, let number = number else {
+            navigationController?.popToRootViewController(animated: true)
+            return
+        }
+        view.startLoadingIndicator()
+        InsightAPI.setStopInfo(.init(travelMode: string, lineName: number),
                                for: "42",
-                               completion: { result in
-                                print(result)
+                               completion: { [weak self] result in
+                                   self?.view.stopLoadingIndicator()
+                                   switch result {
+                                   case .success(let response):
+                                       if response.passengersWillBoard {
+                                           self?.firstImageView.isHidden = false
+                                       } else {
+                                           self?.firstImageView.isHidden = true
+                                       }
+                                       if response.passengersWillDeboard {
+                                           self?.secondImageView.isHidden = false
+                                       } else {
+                                           self?.secondImageView.isHidden = true
+                                       }
+                                   case .failure(let error):
+                                       debugPrint(error.localizedDescription)
+                                   }
                                })
     }
 }

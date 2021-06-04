@@ -105,45 +105,12 @@ final class MainViewController: UIViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let travelMode = TransportType(rawValue: segmentControl.selectedSegmentIndex),
+              let number = textField.text else {
+            return
+        }
         let notificationViewController = segue.destination as! NotificationsViewController
-        notificationViewController.number = textField.text
-        notificationViewController.travelMode = TransportType(rawValue: segmentControl.selectedSegmentIndex)?.string
+        notificationViewController.number = number
+        notificationViewController.travelMode = travelMode
     }
-
-//    private func configureContainment() {
-//        let containmentNavigationController: UINavigationController = .containmentNavigationController
-//        containmentNavigationController.setNavigationBarHidden(true, animated: false)
-//        add(containmentNavigationController)
-//        self.containmentNavigationController = containmentNavigationController
-//    }
-}
-
-//// MARK: - Child View Controllers
-//
-//private extension MainViewController {
-//    func add(_ child: UIViewController) {
-//        addChild(child)
-//
-//        containmentView.addSubview(child.view)
-//        child.view.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            child.view.leadingAnchor.constraint(equalTo: containmentView.leadingAnchor, constant: 0.0),
-//            child.view.trailingAnchor.constraint(equalTo: containmentView.trailingAnchor, constant: 0.0),
-//            child.view.topAnchor.constraint(equalTo: containmentView.topAnchor, constant: 0.0),
-//            child.view.bottomAnchor.constraint(equalTo: containmentView.bottomAnchor, constant: 0.0)
-//        ])
-//        child.didMove(toParent: self)
-//    }
-//
-//    func remove() {
-//        willMove(toParent: nil)
-//        containmentView.subviews.forEach { $0.removeFromSuperview() }
-//        removeFromParent()
-//    }
-//}
-
-// MARK: - Utils (private)
-
-private extension MainViewController {
-
 }

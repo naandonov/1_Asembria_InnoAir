@@ -22,6 +22,7 @@
 		6E5D4124266996B50040C8F9 /* InsightAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D411E266996B50040C8F9 /* InsightAPI.swift */; };
 		6E5D412A266997170040C8F9 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D4128266997170040C8F9 /* MainViewController.swift */; };
 		6E5D412B266997170040C8F9 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D4129266997170040C8F9 /* NotificationsViewController.swift */; };
+		6E5D41372669AE350040C8F9 /* UIView+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5D41362669AE350040C8F9 /* UIView+Loading.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		6E5D411E266996B50040C8F9 /* InsightAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsightAPI.swift; sourceTree = "<group>"; };
 		6E5D4128266997170040C8F9 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6E5D4129266997170040C8F9 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		6E5D41362669AE350040C8F9 /* UIView+Loading.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+Loading.swift"; path = "../../../iOS-inisght/insight/Utilities/UIView+Loading.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 		6E5D40E1266990010040C8F9 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6E5D41362669AE350040C8F9 /* UIView+Loading.swift */,
 				6E5D40E2266990010040C8F9 /* UIColor+Additions.swift */,
 				6E5D40E3266990010040C8F9 /* UIFont+Additions.swift */,
 				6E5D40E4266990010040C8F9 /* UIViewController+Factory.swift */,
@@ -199,6 +202,7 @@
 				6E5D40CD26698FC40040C8F9 /* AppDelegate.swift in Sources */,
 				6E5D4122266996B50040C8F9 /* StopTimetable.swift in Sources */,
 				6E5D4124266996B50040C8F9 /* InsightAPI.swift in Sources */,
+				6E5D41372669AE350040C8F9 /* UIView+Loading.swift in Sources */,
 				6E5D40CF26698FC40040C8F9 /* SceneDelegate.swift in Sources */,
 				6E5D412B266997170040C8F9 /* NotificationsViewController.swift in Sources */,
 			);
