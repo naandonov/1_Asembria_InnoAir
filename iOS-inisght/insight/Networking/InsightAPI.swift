@@ -58,6 +58,7 @@ extension InsightHandler: RequestHandlable {
             var request = try URLRequest.makeEncodedRequest(urlString: urlString)
             request.httpMethod = "POST"
             request.httpBody = try JSONEncoder().encode(stopInfo)
+            request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-type")
             return request
         case .deleteUser(let userId):
             let userPathString = String(format: InsightAPIString.userPath, userId)
