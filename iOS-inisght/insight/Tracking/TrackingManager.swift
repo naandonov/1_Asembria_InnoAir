@@ -26,7 +26,7 @@ private struct BeaconRecord {
 extension TrackingManager {
     enum Constants {
         enum Beacons {
-            static let RegionUUID = "fa258144-d008-427a-9c26-92a3bf0c3d22"
+            static let RegionUUID = "F7826DA6-4FA2-4E98-8024-BC5B71E0893E"
             static let RegionIdentifier = "SearchingRegion"
         }
         enum Notifications {
@@ -201,11 +201,15 @@ extension TrackingManager: CLLocationManagerDelegate {
         }
         print(beacons)
         if beacons.count > 0 {
-            let parsedBeacons = beacons.compactMap {
+            var parsedBeacons = beacons.compactMap {
                 Beacon(minor: $0.minor.intValue, major: $0.major.intValue, rssi: $0.rssi)
             }
-            let beaconsUserInfo = [Constants.Notifications.UserInfoBeaconsKey: parsedBeacons]
-            notificationCenter.post(Notification(name: Constants.Notifications.BeaconsFound, object: self, userInfo: beaconsUserInfo))
+            parsedBeacons = parsedBeacons.filter({ !checkedBeacons.contains($0) })
+            if parsedBeacons.count > 0 {
+                let beaconsUserInfo = [Constants.Notifications.UserInfoBeaconsKey: parsedBeacons]
+                checkedBeacons += parsedBeacons
+                notificationCenter.post(Notification(name: Constants.Notifications.BeaconsFound, object: self, userInfo: beaconsUserInfo))
+            }
         }
     }
     

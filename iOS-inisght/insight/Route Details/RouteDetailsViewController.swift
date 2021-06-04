@@ -29,6 +29,9 @@ class RouteDetailsViewController: UIViewController {
         configureUI()
         configureTableView()
         
+        BeaconsHandler.shared.startListening()
+        BeaconsHandler.shared.delegate = self
+        
         TrackingManager.shared.requestLocation { [weak self] location in
             GoogleAPI.getGeocode(for: self?.destionation ?? "") { result in
                 if case let .success(geocode) = result {
@@ -40,7 +43,12 @@ class RouteDetailsViewController: UIViewController {
                                    let stopId = firstStop.stopId {
                                     StorageManager.shared.setItem(UpcomingStop(stopId: stopId))
                                 }
-                                self?.backgroundView.isHidden = true
+                                self?.backgroundView.isHidden = true                                
+                                StorageManager.shared.setItem(ActiveRoute(destination: self?.destionation ?? "",
+                                                                          stopIds: self?.routeDescriptor?.stops.compactMap({$0.stopId}) ?? [],
+                                                                          stopNames: self?.routeDescriptor?.stops.compactMap({$0.name}) ?? [],
+                                                                          travelMode: self?.routeDescriptor?.travelMode ?? "" ,
+                                                                          lineName: self?.routeDescriptor?.lineName ?? ""))
                             }
                         }
                     }
@@ -134,5 +142,11 @@ extension RouteDetailsViewController: UITableViewDataSource {
         }
         
         return cell
+    }
+}
+
+extension RouteDetailsViewController: BeaconsHandlerDelegate {
+    func didChangeStop() {
+        tableView.reloadData()
     }
 }

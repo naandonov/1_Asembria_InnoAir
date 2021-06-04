@@ -17,8 +17,28 @@ struct ActiveRoute: StorageMainainable {
     
     var destination: String
     var stopIds: [String]
+    var stopNames: [String]
     var travelMode: String
     var lineName: String
+    
+    var fullTransportName: String {
+        var result = ""
+        switch travelMode {
+        case "trolley":
+            result += "Тролейбус"
+        case "bus":
+            result += "Автобус"
+        case "tram":
+            result += "Трамвай"
+        case "subway":
+            result += "Метро"
+        default:
+            break
+        }
+        
+        result += " \(lineName)"
+        return result
+    }
 }
 
 struct RouteDescriptor {
