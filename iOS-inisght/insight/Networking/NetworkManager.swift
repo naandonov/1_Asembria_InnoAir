@@ -9,6 +9,7 @@ import Foundation
 
 private enum SofiaTrafficAPIStrings {
     static let baseURLString = "https://api-routes.sofiatraffic.bg"
+    static let arrivalsBaseURLString = "https://api-arrivals.sofiatraffic.bg/"
     static let directionPath = "/api/v1/trip-guru/"
     static let timetablePath = "/api/v1/arrivals/%@/"
     static let queryParameter = "?arrive_by=0&from_place=%@&itineraries_requested_count=1&lang=bg&optimization=fastest&planning_ts=%@&skipped_travel_options=bicycle,taxi,walk&to_place=%@"
@@ -89,7 +90,7 @@ extension SofiaTrafficHandler: RequestHandlable {
             return try URLRequest.makeEncodedRequest(urlString: urlString)
         case .timetable(let stopId):
             let path = String(format: SofiaTrafficAPIStrings.timetablePath, stopId)
-            let urlString = [SofiaTrafficAPIStrings.baseURLString, path]
+            let urlString = [SofiaTrafficAPIStrings.arrivalsBaseURLString, path]
                 .reduce("", { result, component in result + component })
             
             return try URLRequest.makeEncodedRequest(urlString: urlString)
