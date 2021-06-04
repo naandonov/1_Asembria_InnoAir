@@ -1,0 +1,2 @@
+web: java -jar target/insight-0.0.1-SNAPSHOT.jar
+release: ./mvnw flyway:migrate
