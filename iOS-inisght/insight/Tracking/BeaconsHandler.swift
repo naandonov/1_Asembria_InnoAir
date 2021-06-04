@@ -73,12 +73,12 @@ class BeaconsHandler: NSObject {
                 let name = activeRoute.stopNames[index]
                 if index == 0 {
                     if let userEntity: UserEntity = StorageManager.shared.getItem() {
-//                        InsightAPI.setRoute(InsightHandler.Route(userId: userEntity.id,
-//                                                                 startStopId: activeRoute.stopIds.first ?? "0",
-//                                                                 endStopId: activeRoute.stopIds.last ?? "0",
-//                                                                 travelMode: activeRoute.travelMode,
-//                                                                 lineName: activeRoute.lineName),
-//                                            completion: {_ in })
+                        InsightAPI.setRoute(InsightHandler.Route(userId: userEntity.id,
+                                                                 startStopId: activeRoute.stopIds.first ?? "0",
+                                                                 endStopId: activeRoute.stopIds.last ?? "0",
+                                                                 travelMode: activeRoute.travelMode,
+                                                                 lineName: activeRoute.lineName),
+                                            completion: {_ in })
                     }
                     resultString += "Достигнахте началната зададена спирка. "
                     SofiaTrafficAPI.getTimetable(for: stopId) { [weak self] result in

@@ -49,6 +49,14 @@
 	<array>
 		<string>armv7</string>
 	</array>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>The application requires your location in order to interact with iBeacons</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>The application requires your location in order to interact with iBeacons</string>
+    <key>NSLocationUsageDescription</key>
+    <string>The application requires your location in order to interact with iBeacons</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>The application requires your location in order to interact with iBeacons</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
