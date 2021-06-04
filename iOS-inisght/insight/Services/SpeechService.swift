@@ -13,7 +13,7 @@ enum VoiceType: String {
     case standardBg = "bg-bg-Standard-A"
 }
 
-class SpeechService: NSObject, AVAudioPlayerDelegate {
+final class SpeechService: NSObject, AVAudioPlayerDelegate {
 
     static let shared = SpeechService()
     private(set) var busy: Bool = false
@@ -46,15 +46,18 @@ class SpeechService: NSObject, AVAudioPlayerDelegate {
             switch result {
             case .success(let data):
                 completion(data)
-                self?.completionHandler = completion
-                self?.player = try! AVAudioPlayer(data: data!)
-                self?.player?.delegate = self
-                self?.player!.play()
             case .failure:
                 self?.busy = false
                 completion(nil)
             }
         }
+    }
+    
+    func play(_ data: Data) {
+//        self?.completionHandler = completion
+        player = try? AVAudioPlayer(data: data)
+        player?.delegate = self
+        player?.play()
     }
     
     // Implement AVAudioPlayerDelegate "did finish" callback to cleanup and notify listener of completion.
@@ -64,5 +67,22 @@ class SpeechService: NSObject, AVAudioPlayerDelegate {
         self.busy = false
         
         self.completionHandler = nil
+    }
+}
+
+extension SpeechService {
+    func store(audioData: Data?, name: String) {
+        let fileManager = FileManager.default
+        let soundsDirectoryURL = fileManager.urls(for: .libraryDirectory, in: .userDomainMask).first!.appendingPathComponent("Sounds")
+
+        //attempt to create the folder
+        do {
+            try fileManager.createDirectory(atPath: soundsDirectoryURL.path,
+                                            withIntermediateDirectories: true, attributes: nil)
+        } catch let error as NSError {
+            print("Error: \(error.localizedDescription)")
+        }
+        let sounFileURL = soundsDirectoryURL.appendingPathComponent("\(name).aiff")
+        try? audioData?.write(to: sounFileURL)
     }
 }

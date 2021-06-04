@@ -180,7 +180,10 @@ extension MainViewController: VoiceRecorderOutputProtocol {
                         Плъзнете вашия пръст от дясно наляво за да повторите гласовото въвеждане.
                         """,
                                            completion: { data in
-                                            // TODO: Notification
+                                            guard let data = data else {
+                                                return
+                                            }
+                                            SpeechService.shared.play(data)
                                            })
             }
         }
