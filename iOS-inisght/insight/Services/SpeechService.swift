@@ -60,10 +60,6 @@ final class SpeechService: NSObject, AVAudioPlayerDelegate {
         player?.play()
     }
     
-    func stop() {
-        player?.stop()
-    }
-    
     // Implement AVAudioPlayerDelegate "did finish" callback to cleanup and notify listener of completion.
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.player?.delegate = nil
