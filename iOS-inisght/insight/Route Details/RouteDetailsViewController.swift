@@ -15,7 +15,7 @@ class RouteDetailsViewController: UIViewController {
     @IBOutlet private weak var transportLabel: UILabel!
     @IBOutlet private weak var tableView: UITableView!
     
-    var destionation: String? = "Ветеринарна клиника орион"
+    var destionation: String?
     private var routeDescriptor: RouteDescriptor? {
         didSet {
             tableView.reloadData()
@@ -96,6 +96,16 @@ class RouteDetailsViewController: UIViewController {
         destinationLabel.text = destionation
         durationLabel.text = routeDescriptor.duration
         transportLabel.text = routeDescriptor.fullTransitName
+        
+        let content = "Началната спирка по вашия маршрут се намира на " + routeDescriptor.startContent +
+            ". Вземете " + routeDescriptor.fullTransitName + ". Пътуването ще продължи " + routeDescriptor.duration
+        SpeechService.shared.speak(text: content,
+                                   completion: { data in
+                                    guard let data = data else {
+                                        return
+                                    }
+                                    SpeechService.shared.play(data)
+                                   })
     }
 }
 
@@ -148,5 +158,16 @@ extension RouteDetailsViewController: UITableViewDataSource {
 extension RouteDetailsViewController: BeaconsHandlerDelegate {
     func didChangeStop() {
         tableView.reloadData()
+    }
+    
+    func didReachFinalStop() {
+        guard let routeDescriptor = routeDescriptor else {
+            return
+        }
+        let viewController = UIViewController.successViewController
+        viewController.content = "До вашата дестинация остава придвижване от " + routeDescriptor.endContent
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10) { [weak self] in
+            self?.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }

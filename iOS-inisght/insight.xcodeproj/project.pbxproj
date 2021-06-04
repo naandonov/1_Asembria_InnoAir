@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E852BA82669D9DA00D9A1CA /* SuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E852BA72669D9DA00D9A1CA /* SuccessViewController.swift */; };
 		4E89782D266665880070A1A1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89782C266665880070A1A1 /* AppDelegate.swift */; };
 		4E89782F266665880070A1A1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E89782E266665880070A1A1 /* SceneDelegate.swift */; };
 		4E897834266665880070A1A1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E897832266665880070A1A1 /* Main.storyboard */; };
@@ -47,6 +48,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E852BA72669D9DA00D9A1CA /* SuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessViewController.swift; sourceTree = "<group>"; };
 		4E897829266665880070A1A1 /* insight.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = insight.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E89782C266665880070A1A1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E89782E266665880070A1A1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				4E8978492666A11B0070A1A1 /* RouteDetailsViewController.swift */,
 				4E89784C2666C59E0070A1A1 /* StopTableViewCell.swift */,
 				4EE99FBE266998EE000F7C47 /* RouteDescriptor.swift */,
+				4E852BA72669D9DA00D9A1CA /* SuccessViewController.swift */,
 			);
 			path = "Route Details";
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				4EE99FB62669543E000F7C47 /* Beacon.swift in Sources */,
 				4E89784A2666A11B0070A1A1 /* RouteDetailsViewController.swift in Sources */,
 				4EE99FBF266998EE000F7C47 /* RouteDescriptor.swift in Sources */,
+				4E852BA82669D9DA00D9A1CA /* SuccessViewController.swift in Sources */,
 				D130CEFA2668E715003C0652 /* Geocode.swift in Sources */,
 				4E89784D2666C59E0070A1A1 /* StopTableViewCell.swift in Sources */,
 				4E89784626666C030070A1A1 /* MainViewController.swift in Sources */,

@@ -8,21 +8,21 @@
 import Foundation
 
 struct StopTimetable: Decodable {
-    let lines: String
-    let arrivals: [Arrivals]
+    let lines: [Line]
 }
 
-extension StopTimetable {
-    struct Line {
-        let vehicleType: String // could be enum
-        
-        private enum CodingKeys: String, CodingKey {
-            case vihicleType = "vehicle_type"
-            case arrivals
-        }
-    }
+struct Line: Decodable {
+    let arrivals: [Arrivals]
+    let name: String
+    let vehicleType: String // could be enum
     
-    struct Arrivals: Decodable {
-        let time: Date
+    private enum CodingKeys: String, CodingKey {
+        case vehicleType = "vehicle_type"
+        case name
+        case arrivals
     }
+}
+
+struct Arrivals: Decodable {
+    let time: Date
 }

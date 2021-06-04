@@ -13,6 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let trackingManager = TrackingManager.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        if let _: UserEntity = StorageManager.shared.getItem() {} else {
+            StorageManager.shared.setItem(UserEntity(id: UUID().uuidString))
+        }
+        
         trackingManager.handleLocationServiceAuthorization()
         trackingManager.startListentingForBeaconsInProximity()
         return true

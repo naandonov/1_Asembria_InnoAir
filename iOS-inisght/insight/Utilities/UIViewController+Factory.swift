@@ -15,4 +15,12 @@ extension UIViewController {
     static var containmentNavigationController: UINavigationController {
         return UIStoryboard(name: Storyboard.main.rawValue, bundle: nil).instantiateViewController(identifier: "ContainmentNavigationController")
     }
+    
+    static var routeDetailsViewController: RouteDetailsViewController {
+        return UIStoryboard(name: Storyboard.main.rawValue, bundle: nil).instantiateViewController(identifier: "RouteDetailsViewController")
+    }
+    
+    static var successViewController: SuccessViewController {
+        return UIStoryboard(name: Storyboard.main.rawValue, bundle: nil).instantiateViewController(identifier: "SuccessViewController")
+    }
 }

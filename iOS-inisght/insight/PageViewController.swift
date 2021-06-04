@@ -78,6 +78,7 @@ extension PageViewController: CarouselPage {
         playerLayer.frame = playerView.bounds
         playerLayer.videoGravity = .resize
         playerView.layer.addSublayer(playerLayer)
+        player.volume = 1.0
         player.play()
     }
 

@@ -233,7 +233,11 @@ private extension MainViewController {
                   let destination = navigation.topViewController as? DestinationViewController else {
                 return
             }
-            if voiceRecorder.isRecording {
+            if case let .destination(resultText) = destination.configuration {
+                let viewController = UIViewController.routeDetailsViewController
+                viewController.destionation = resultText
+                containmentNavigationController?.pushViewController(viewController, animated: true)
+            } else if voiceRecorder.isRecording {
                 destination.configuration = .ready
                 voiceRecorder.stopRecording()
             } else {

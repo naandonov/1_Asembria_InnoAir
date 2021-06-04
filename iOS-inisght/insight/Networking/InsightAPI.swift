@@ -49,6 +49,7 @@ extension InsightHandler: RequestHandlable {
                 .reduce("", {result, component in result + component})
             var request = try URLRequest.makeEncodedRequest(urlString: urlString)
             request.httpMethod = "POST"
+            request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-type")
             request.httpBody = try JSONEncoder().encode(route)
             return request
         case .postStopInfo(let stopId, let stopInfo):
@@ -57,6 +58,7 @@ extension InsightHandler: RequestHandlable {
                 .reduce("", {result, component in result + component})
             var request = try URLRequest.makeEncodedRequest(urlString: urlString)
             request.httpMethod = "POST"
+            request.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-type")
             request.httpBody = try JSONEncoder().encode(stopInfo)
             return request
         case .deleteUser(let userId):
