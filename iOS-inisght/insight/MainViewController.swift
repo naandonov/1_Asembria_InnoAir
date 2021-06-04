@@ -7,6 +7,10 @@
 
 import UIKit
 
+private enum Constants {
+    static let initialOnboardingShown = "initialOnboardingShown"
+}
+
 final class MainViewController: UIViewController {
     @IBOutlet private weak var containerView: UIView!
     @IBOutlet private weak var containmentView: UIView!
@@ -15,10 +19,25 @@ final class MainViewController: UIViewController {
 
     private weak var containmentNavigationController: UINavigationController?
 
+    private lazy var voiceRecorder: VoiceRecorderInputProtocol = VoiceRecorder(output: self)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
         configureContainment()
+        startInitialOnboarding()
+        configureGestures()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        voiceRecorder.requestPermission()
+    }
+
+    deinit {
+        view.gestureRecognizers?.forEach { [weak view] in
+            view?.removeGestureRecognizer($0)
+        }
     }
 
     private func configureUI() {
@@ -42,13 +61,13 @@ final class MainViewController: UIViewController {
         containmentView.layer.cornerRadius = 30
         containmentView.clipsToBounds = true
 
-        instructionsTitleLabel?.font = .primaryTitleFont
-        instructionsTitleLabel?.textColor = .textColor
-        instructionsTitleLabel?.text = "Инструкции за употреба"
+        instructionsTitleLabel.font = .primaryTitleFont
+        instructionsTitleLabel.textColor = .textColor
+        instructionsTitleLabel.text = "Инструкции за употреба"
 
-        instructionsSubtitleLabel?.font = .secondaryTitleFont
-        instructionsSubtitleLabel?.textColor = .textColor
-        instructionsSubtitleLabel?.text = "Докоснете екрана два пъти с два пръста"
+        instructionsSubtitleLabel.font = .secondaryTitleFont
+        instructionsSubtitleLabel.textColor = .textColor
+        instructionsSubtitleLabel.text = "Докоснете екрана два пъти с два пръста"
     }
 
     private func configureContainment() {
@@ -174,5 +193,55 @@ extension MainViewController: VoiceRecorderOutputProtocol {
 // MARK: - Utils (private)
 
 private extension MainViewController {
+    enum GestureName: String {
+        case oneFingerOneTap
+        case twoFingersDoubleTap
+    }
 
+    func configureGestures() {
+        let oneFingerOneTap = UITapGestureRecognizer(target: self,
+                                                     action: #selector(onGestureRecogniserAction(_:)))
+        oneFingerOneTap.numberOfTapsRequired = 1
+        oneFingerOneTap.numberOfTouchesRequired = 1
+        oneFingerOneTap.name = GestureName.oneFingerOneTap.rawValue
+
+        let twoFingersDoubleTap = UITapGestureRecognizer(target: self,
+                                                         action: #selector(onGestureRecogniserAction(_:)))
+        twoFingersDoubleTap.numberOfTapsRequired = 2
+        twoFingersDoubleTap.numberOfTouchesRequired = 2
+        twoFingersDoubleTap.name = GestureName.twoFingersDoubleTap.rawValue
+
+        let gestures = [oneFingerOneTap, twoFingersDoubleTap]
+
+        gestures.forEach {
+            view.addGestureRecognizer($0)
+        }
+    }
+
+    @objc func onGestureRecogniserAction(_ gesture: UIGestureRecognizer) {
+        guard
+            let name = gesture.name,
+            let tag = GestureName(rawValue: name)
+        else {
+            assertionFailure("Missing gesture recognizer tag \(gesture)")
+            return
+        }
+
+        switch tag {
+        case .oneFingerOneTap:
+            guard let navigation = containmentNavigationController,
+                  let destination = navigation.topViewController as? DestinationViewController else {
+                return
+            }
+            if voiceRecorder.isRecording {
+                destination.configuration = .ready
+                voiceRecorder.stopRecording()
+            } else {
+                destination.configuration = .listening
+                voiceRecorder.startRecording()
+            }
+        case .twoFingersDoubleTap:
+            startOnboarding()
+        }
+    }
 }
